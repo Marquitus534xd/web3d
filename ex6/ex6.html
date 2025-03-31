@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script>
+        AFRAME.registerComponent("mylink", {
+        init: function() {  
+         this.el.addEventListener("click", (e) => {              
+            window.location = this.data.href;      
+           })
+        }
+      })
+    </script>
+
+
+  </head>
+  <body>
+  <a-scene cursor="rayOrigin: mouse">
+    <a-assets>
+      <img id="imgFantasma" src="curva.png" >
+      <img id="imgCasa" src="casadelsusto.jpg" >
+      <img id="imgSortida" src="assets/entragroc.png" >
+      <a-asset-item id="dracula" src="gengar/scene.gltf"></a-asset-item>
+    </a-assets>
+   
+    <a-entity camera look-controls wasd-controls="false">
+    <!-- fuseTimeout = el temps que triga en fer click des de que es posiciona sobre un objecte-->
+     <a-entity cursor="fuse: true; fuseTimeout: 2000"
+           position="0 0 -1"
+           geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+           material="color: red; shader: flat"
+           animation="property: components.material.material.color;
+                 type: color;
+                 to: white;
+                 dur: 1000;
+                 dir: alternate;
+                 loop: true">
+     </a-entity>
+    </a-entity>
+
+
+   
+   
+      <a-sky src="#imgCasa"></a-sky>
+      <a-box position="153.8575 -6.47726 -15.44086" scale="30 30 30" transparent="yes" src="#imgFantasma" animation="property: rotation; dur: 10000; to: 0 360 0; loop: NaN" material="" geometry="" rotation="0 360 0">             
+      </a-box>
+
+      <a-entity gltf-model="gengar/scene.gltf" position="2.3176 -2.56728 -0.24052" scale="0.04209 0.03993 0.04209" animation="property: position; dur: 5000; from: 0 -2.39296 -160.02142; to: 0.519 -3.216 -5.654; dir: alternate; loop: true" material="" geometry=""></a-entity>
+      <a-plane position="-1.5 0 1.5" src="#imgSortida" rotation="0 150 0"  transparent="true" mylink="href: ;"></a-plane>
+      </a-entity>        
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
