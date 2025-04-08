@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escena A-Frame</title>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+</head>
+<body>
+  <a-scene cursor="rayOrigin: mouse">
+    <a-assets>
+      <img id="imgEntrada" src="start.png" alt="Botón de entrada" />
+      <img id="fons" src="fons.jpg" alt="Fondo" />
+
+      <!-- Modelos 3D -->
+      <a-asset-item id="tum" src="tung_tung_tung_sahur/scene.gltf"></a-asset-item>
+      <a-asset-item id="maricano" src="ovni_low_poly/scene.gltf"></a-asset-item>
+      <a-asset-item id="tiburon" src="tralalero_tralala/scene.gltf"></a-asset-item>
+      <a-asset-item id="arbol" src="brr_brr_patapim/scene.gltf"></a-asset-item>
+      <a-asset-item id="cocodrilo" src="bombardiro_crocodilo/scene.gltf"></a-asset-item>
+      <a-asset-item id="nave" src="nave/scene.gltf"></a-asset-item>
+    </a-assets>
+
+    <!-- Cámara y cursor -->
+    <a-entity camera look-controls wasd-controls="false">
+      <a-entity id="myCursor"
+        cursor="fuse: true; fuseTimeout: 1000"
+        position="0 0 -1"
+        geometry="primitive: circle; radius: 0.005"
+        material="color: red; shader: flat"
+        animation="property: components.material.material.color; type: color; to: white; dur: 1000; dir: alternate; loop: true">
+      </a-entity>
+    </a-entity>
+
+    <!-- Fondo -->
+    <a-sky src="#fons"></a-sky>
+
+    <!-- Botón de inicio -->
+    <a-plane id="inici"
+      position="0 0.6 -5"
+      src="#imgEntrada"
+      rotation="0 0 0"
+      transparent="true"
+      visible="true"
+      b_inici
+      animation="property: position; dur: 500; from: 0 0.6 -5; to: 0 0.6 -4.5; dir: alternate; loop: true">
+    </a-plane>
+
+    <!-- OVNIS (inicialmente ocultos) -->
+    <a-entity id="ovni1" gltf-model="#tum" position="-5 2.5 -5" scale="0.109 0.109 0.109" visible="false" explota
+      animation="property: position; dur: 4000; from: -5 1 -5; to: 5 1 -5; loop: true; dir: alternate"></a-entity>
+
+    <a-entity id="ovni2" gltf-model="#maricano" position="-5 1 -5" scale="0.5 0.5 0.5" visible="false" explota
+      animation="property: position; dur: 5000; from: -5 2 -5; to: 5 2 -5; loop: true; dir: alternate"></a-entity>
+
+    <a-entity id="ovni3" gltf-model="#tiburon" position="-5 2 -5" scale="0.145 0.145 0.145" visible="false" explota
+      animation="property: position; dur: 6000; from: -5 3 -5; to: 5 3 -5; loop: true; dir: alternate"></a-entity>
+
+    <a-entity id="ovni4" gltf-model="#arbol" position="-5 2 5" scale="0.145 0.145 0.145" rotation="0 180 0" visible="false" explota
+      animation="property: position; dur: 6000; from: -5 2 5; to: 5 3 5; loop: true; dir: alternate"></a-entity>
+
+    <a-entity id="ovni5" gltf-model="#cocodrilo" position="-5 2 5" scale="0.145 0.145 0.145" visible="false" explota
+      animation="property: position; dur: 6000; from: -5 3 5; to: 5 3 -5; loop: true; dir: alternate"></a-entity>
+
+    <a-entity id="ovni6" gltf-model="#nave" position="-5 2 5" scale="0.001 0.001 0.001" visible="false" explota
+      animation="property: position; dur: 6000; from: -5 3 5; to: 5 3 -5; loop: true; dir: alternate"></a-entity>
+  </a-scene>
+
+  <script>
+    let idInterval;
+    let segons = 0;
+    let punts = 0;
+
+    const ovnis = [
+      '#ovni1',
+      '#ovni2',
+      '#ovni3',
+      '#ovni4',
+      '#ovni5',
+      '#ovni6'
+    ];
+
+    // Sonido al hacer clic
+    window.addEventListener("click", () => {
+      new Audio("laser.mp3").play();
+    });
+
+    function controlImatges() {
+      const totalOvnis = ovnis.length;
+      const actualIndex = Math.floor(segons / 5);
+
+      // Oculta todos
+      ovnis.forEach(id => {
+        document.querySelector(id).setAttribute('visible', false);
+      });
+
+      // Muestra el actual si aún hay ovnis
+      if (actualIndex < totalOvnis) {
+        document.querySelector(ovnis[actualIndex]).setAttribute('visible', true);
+      } else {
+        // Final del juego
+        clearInterval(idInterval);
+        alert("Punts: " + punts);
+        segons = 0;
+        punts = 0;
+        document.querySelector('#inici').setAttribute('visible', true);
+        return;
+      }
+
+      segons += 5;
+    }
+
+    AFRAME.registerComponent("b_inici", {
+      init: function () {
+        this.el.addEventListener("click", () => {
+          idInterval = setInterval(controlImatges, 5000);
+          segons = 0;
+          punts = 0;
+          controlImatges(); // Mostrar el primer OVNI de inmediato
+          document.querySelector('#inici').setAttribute('visible', false);
+          new Audio("start.mp3").play();
+        });
+      }
+    });
+
+    AFRAME.registerComponent("explota", {
+      init: function () {
+        this.el.addEventListener("click", () => {
+          new Audio("explo.mp3").play();
+          punts += 10;
+          this.el.setAttribute('visible', false);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
