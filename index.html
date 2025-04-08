@@ -32,7 +32,6 @@
             font-size: 18px;
         }
         .container {
-            /*padding: 80px 20px 20px;*/
             text-align: center;
         }
 
@@ -57,16 +56,17 @@
             text-align: center;
         }
 
-
         .info a:hover {
             text-decoration: underline;
         }
+
         .flex-container {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             padding: 20px;
         }
+
         .box {
             display: flex;
             flex-direction: column;
@@ -79,11 +79,13 @@
             border: 2px solid #000000;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
         }
+
         .box img {
             width: 90%;
             height: auto;
             cursor: pointer;
         }
+
         .about {
             padding: 20px;
             text-align: center;
@@ -99,10 +101,11 @@
         }
 
         .about p {
-           max-width: 600px;
-              margin: auto;
-              padding-top: 10px;
+            max-width: 600px;
+            margin: auto;
+            padding-top: 10px;
         }
+
         .about button {
             margin-top: 15px;
             padding: 10px 20px;
@@ -113,6 +116,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
         .about button:hover {
             background-color: #333;
         }
@@ -123,10 +127,12 @@
             text-align: center;
             padding: 10px;
         }
+
         @media (max-width: 768px) {
             header {
                 padding-right: 15px;
             }
+
             .flex-container {
                 flex-direction: column;
                 align-items: center;
@@ -139,108 +145,102 @@
         <nav>
             <a href="#introduccio">Introducció</a>
             <a href="#exercicis">Exercicis</a>
-            <a href="#sobre-mi">Sobre Mi</a>
+            <a href="#sobre-mi">Sobre mi</a>
         </nav>
     </header>
+
     <div class="container">
         <img src="imatges/estanteria.jpg" alt="Imatge Principal" class="main-image">
+
         <div class="info" id="introduccio">
             <h2>PORTAFOLIS LLIBRERIES 3D</h2>
             <p>Les llibreries 3D en JavaScript han revolucionat la creació d'entorns virtuals i experiències immersives a la web.
-                A-Frame i MindAR són dues de les més destacades, cadascuna amb funcionalitats específiques per a diferents tipus de projectes.
-            </p>
-            <p>
-            Gràcies a aquestes eines, els desenvolupadors podem dissenyar des d'experiències interactives senzilles 
-            fins a aplicacions immersives avançades que combinen realitat virtual, realitat augmentada i interacció 3D.
-             Aquestes tecnologies han convertit el web en una plataforma cada cop més potent per a la creació de contingut digital innovador.
-             </p>
-            <p>Aquest portafolis explora aquestes llibreries en profunditat i presenta els projectes desenvolupats amb cadascuna d'elles.
-            </p>
+                A-Frame i MindAR són dues de les més destacades, cadascuna amb funcionalitats específiques per a diferents tipus de projectes.</p>
+            <p>Gràcies a aquestes eines, els desenvolupadors podem dissenyar des d'experiències interactives senzilles 
+                fins a aplicacions immersives avançades que combinen realitat virtual, realitat augmentada i interacció 3D.
+                Aquestes tecnologies han convertit el web en una plataforma cada cop més potent per a la creació de contingut digital innovador.</p>
+            <p>Aquest portafolis explora aquestes llibreries en profunditat i presenta els projectes desenvolupats amb cadascuna d'elles.</p>
             <a href="https://github.com/Marquitus534xd/web3d" target="_blank">Visita el GitHub d'aquest projecte</a>
         </div>
+
         <div class="flex-container" id="exercicis">
             <div class="box">
                 <img src="imatges/tierra2.png" alt="Imatge 1" onclick="location.href='ex1/ex1.html'">
                 <div>
                     <h3>Una aproximació a les llibreries 3D</h3>
-                    <p>Un petit exercici amb A-frame per testejar l'apliació en diversos dispositius: en pantalla d'ordinador, en format mòbil i a unes ulleres de Realitat Virtual</p>     
+                    <p>Un petit exercici amb A-Frame per testejar l'aplicació en diversos dispositius: pantalla d’ordinador, format mòbil i ulleres de Realitat Virtual.</p>     
                 </div>
             </div>
+
             <div class="box">
                 <img src="imatges/zombie.jpg" alt="Imatge 2" onclick="location.href='ex2/ex2.html'">
                 <div>
-                    <h3>Zombie 3D</h3>
-                    <p>Projectar un diseny 3d de un zombie ballant</p>
+                    <h3>Zombi 3D</h3>
+                    <p>Projectar un disseny 3D d’un zombi ballant.</p>
                 </div>
             </div>
+
             <div class="box">
                 <img src="imatges/mapa.png" alt="Imatge 3" onclick="location.href='ex3/ex3.html'">
                 <div>
-                    <h3>On és el WALLY</h3>
-                    <p>Busca a Wally en el mapa entre los zombies.</p>
+                    <h3>On és en Wally?</h3>
+                    <p>Cerca en Wally al mapa entre els zombis.</p>
                 </div>
             </div>
-        </div>
 
-
-        <div class="flex-container" id="exercicis">
             <div class="box">
                 <img src="imatges/mascara.jpg" alt="Imatge 4" onclick="location.href='ex4/ex4.html'">
                 <div>
-                    <h3>Model 3d de la mascara i del barret</h3>
-                    <p>Mascara de la peli amor de gata i baret de harry potter</p>     
+                    <h3>Model 3D de la màscara i el barret</h3>
+                    <p>Màscara de la pel·lícula *El amor de Gata* i barret de *Harry Potter*.</p>     
                 </div>
             </div>
+
             <div class="box">
                 <img src="imatges/captura ej5.png" alt="Imatge 5" onclick="location.href='ex5/ex5.html'">
                 <div>
                     <h3>Recorregut de pintures</h3>
-                    <p>Pintures famoses</p>
+                    <p>Pintures famoses exposades en un recorregut virtual.</p>
                 </div>
             </div>
+
             <div class="box">
                 <img src="imatges/casa.png" alt="Imatge 6" onclick="location.href='ex6/ex6.html'">
                 <div>
-                    <h3> La casa abandonada</h3>
-                    <p>Una casa abandonada amb diferents objectes 3D</p>
+                    <h3>La casa abandonada</h3>
+                    <p>Una casa abandonada amb diferents objectes 3D.</p>
                 </div>
             </div>
-        </div>
-        <div class="box">
-            <img src="imatges/cerrado.jpeg" alt="Imatge 8" onclick="location.href='ex8/ex8.html'">
-            <div>
-                <h3>Trabajando</h3>
-                <p>...</p>
+
+            <div class="box">
+                <img src="imatges/cerrado.jpeg" alt="Imatge 8" onclick="location.href='ex8/ex8.html'">
+                <div>
+                    <h3>Projecte en construcció</h3>
+                    <p>...</p>
+                </div>
             </div>
+
             <div class="box">
                 <img src="imatges/ej9.png" alt="Imatge 9" onclick="location.href='ex9/ex9.html'">
                 <div>
-                    <h3>Joc 3d aliens</h3>
-                    <p>Diferents figures 3d per la pantalla.</p>
+                    <h3>Joc 3D d’aliens</h3>
+                    <p>Diferents figures 3D que apareixen per la pantalla.</p>
                 </div>
-        </div>
+            </div>
         </div>
 
-
-      <div class="about" id="sobre-mi">
+        <div class="about" id="sobre-mi">
             <h2>Marc Cepeda Vivas</h2>
             <img src="imatges/perfil.jpg" alt="Foto de perfil">
-           
-            <p>Estudiant de SMIX del cicle formatiu de Grau Mitjà en Sistemes Microinformàtics i Xarxes.
-            </p>
-            <p>
-                 M'apassiona la tecnologia i la informàtica, especialment tot el que té a veure amb la configuració,
-                  el manteniment i la seguretat dels sistemes informàtics.
-            </p>
-            <p>
-                   Durant la meva formació, he adquirit coneixements en hardware, xarxes, sistemes operatius i administració de servidors.
-                    M'agrada treballar en equip i solucionar problemes tècnics de manera eficient.
-                     Estic motivat per continuar aprenent i aplicar els meus coneixements en un entorn professional.
-            </p>
+            <p>Estudiant de SMIX del cicle formatiu de Grau Mitjà en Sistemes Microinformàtics i Xarxes.</p>
+            <p>M'apassiona la tecnologia i la informàtica, especialment tot el que té a veure amb la configuració, el manteniment i la seguretat dels sistemes informàtics.</p>
+            <p>Durant la meva formació, he adquirit coneixements en hardware, xarxes, sistemes operatius i administració de servidors.
+                M'agrada treballar en equip i solucionar problemes tècnics de manera eficient.
+                Estic motivat per continuar aprenent i aplicar els meus coneixements en un entorn professional.</p>
             <button onclick="window.location.href='curriculum.pdf'">Descarrega el meu CV</button>
-            
         </div>
     </div>
+
     <footer>
         <p>&copy; 2025 El Meu Lloc Web</p>
     </footer>
