@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Pong 3D</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+      #joc-container {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        border: 3px solid white;
+        overflow: hidden;
+      }
+      a-scene {
+        width: 100%;
+        height: 100%;
+      }
+      #scoreboard {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 24px;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="joc-container">
+      <div id="scoreboard">Jugador 1: 0 | Jugador 2: 0</div>
+      <a-scene embedded>
+        <!-- Paleta del jugador 1 -->
+        <a-box
+          id="paddle1"
+          position="-4 0 -5"
+          depth="0.5"
+          height="1.5"
+          width="0.3"
+          color="#4CC3D9"
+        ></a-box>
+
+        <!-- Paleta del jugador 2 -->
+        <a-box
+          id="paddle2"
+          position="4 0 -5"
+          depth="0.5"
+          height="1.5"
+          width="0.3"
+          color="#FFC65D"
+        ></a-box>
+
+        <!-- Pelota -->
+        <a-sphere
+          id="ball"
+          position="0 0 -5"
+          radius="0.2"
+          color="#FF0000"
+        ></a-sphere>
+
+        <!-- Cámara -->
+        <a-camera position="0 0 0" look-controls="enabled: false" wasd-controls="enabled: false"></a-camera>
+      </a-scene>
+    </div>
+
+    <!-- Sonido de rebote -->
+    <audio id="bounce-sound" src="bounce.mp3"></audio>
+
+    <script>
+      const paddle1 = document.getElementById("paddle1");
+      const paddle2 = document.getElementById("paddle2");
+      const ball = document.getElementById("ball");
+      const scoreboard = document.getElementById("scoreboard");
+      const bounceSound = document.getElementById("bounce-sound");
+
+      let paddle1Y = 0;
+      let paddle2Y = 0;
+      let ballX = 0;
+      let ballY = 0;
+      let ballSpeedX = 0.05;
+      let ballSpeedY = 0.03;
+      let velocitat = 0.5;
+
+      let score1 = 0;
+      let score2 = 0;
+
+      // Movimiento de las paletas
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "w") {
+          paddle1Y += velocitat;
+        } else if (e.key === "s") {
+          paddle1Y -= velocitat;
+        } else if (e.key === "ArrowUp") {
+          paddle2Y += velocitat;
+        } else if (e.key === "ArrowDown") {
+          paddle2Y -= velocitat;
+        }
+
+        // Limitar el movimiento de las paletas
+        paddle1Y = Math.max(Math.min(paddle1Y, 2.5), -2.5);
+        paddle2Y = Math.max(Math.min(paddle2Y, 2.5), -2.5);
+
+        paddle1.setAttribute("position", `-4 ${paddle1Y} -5`);
+        paddle2.setAttribute("position", `4 ${paddle2Y} -5`);
+      });
+
+      // Movimiento de la pelota
+      function moveBall() {
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+
+        // Rebote en los bordes superior e inferior
+        if (ballY > 2.8 || ballY < -2.8) {
+          ballSpeedY *= -1;
+        }
+
+        // Rebote en las paletas
+        const paddle1Pos = paddle1.getAttribute("position");
+        const paddle2Pos = paddle2.getAttribute("position");
+
+        if (
+          ballX < -3.8 &&
+          ballY > paddle1Pos.y - 0.75 &&
+          ballY < paddle1Pos.y + 0.75
+        ) {
+          ballSpeedX *= -1;
+          bounceSound.play(); // Reproducir sonido de rebote
+        }
+
+        if (
+          ballX > 3.8 &&
+          ballY > paddle2Pos.y - 0.75 &&
+          ballY < paddle2Pos.y + 0.75
+        ) {
+          ballSpeedX *= -1;
+          bounceSound.play(); // Reproducir sonido de rebote
+        }
+
+        // Reiniciar la pelota si sale por los lados
+        if (ballX > 4.5) {
+          score1++;
+          updateScore();
+          resetBall();
+        } else if (ballX < -4.5) {
+          score2++;
+          updateScore();
+          resetBall();
+        }
+
+        ball.setAttribute("position", `${ballX} ${ballY} -5`);
+        requestAnimationFrame(moveBall);
+      }
+
+      function resetBall() {
+        ballX = 0;
+        ballY = 0;
+
+        // Generar una dirección aleatoria para la pelota
+        const randomAngle = Math.random() * Math.PI * 2; // Ángulo aleatorio entre 0 y 2π
+        ballSpeedX = 0.05 * Math.cos(randomAngle); // Velocidad en X basada en el ángulo
+        ballSpeedY = 0.05 * Math.sin(randomAngle); // Velocidad en Y basada en el ángulo
+
+        // Asegurarse de que la pelota no se mueva demasiado lento en X
+        if (Math.abs(ballSpeedX) < 0.02) {
+          ballSpeedX = ballSpeedX > 0 ? 0.02 : -0.02;
+        }
+      }
+
+      function updateScore() {
+        scoreboard.textContent = `Jugador 1: ${score1} | Jugador 2: ${score2}`;
+      }
+
+      moveBall();
+    </script>
+  </body>
+</html>
