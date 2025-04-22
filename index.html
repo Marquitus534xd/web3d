@@ -33,6 +33,7 @@
         }
         .container {
             text-align: center;
+            margin-top: 80px; /* Espacio para evitar que el contenido quede debajo del header */
         }
 
         .main-image {
@@ -62,8 +63,9 @@
 
         .flex-container {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            justify-content: center; /* Centrar los cuadros horizontalmente */
+            flex-wrap: wrap; /* Permitir que los cuadros se ajusten en varias filas */
+            gap: 20px; /* Espaciado uniforme entre los cuadros */
             padding: 20px;
         }
 
@@ -73,7 +75,7 @@
             background: #5862be;
             padding: 15px;
             margin: 10px;
-            width: 400px;
+            width: 300px; /* Ancho consistente para los cuadros */
             align-items: center;
             text-align: center;
             border: 2px solid #000000;
@@ -81,7 +83,7 @@
         }
 
         .box img {
-            width: 90%;
+            width: 100%; /* Ajustar la imagen al ancho del cuadro */
             height: auto;
             cursor: pointer;
         }
@@ -134,8 +136,12 @@
             }
 
             .flex-container {
-                flex-direction: column;
+                flex-direction: column; /* Cambiar a una sola columna en pantallas pequeñas */
                 align-items: center;
+            }
+
+            .box {
+                width: 90%; /* Ajustar el ancho de los cuadros en pantallas pequeñas */
             }
         }
     </style>
@@ -227,12 +233,13 @@
                     <p>Diferents figures 3D per disparar amb el ratoli</p>
                 </div>
             </div>
-        </div>
-        <div class="box">
-            <img src="imatges/ej11.png" alt="Imatge 11" onclick="location.href='ex11/ex11.html'">
-            <div>
-                <h3>Pong</h3>
-                <p>Joc Pong Moviment amb W S i les fletches</p>
+
+            <div class="box">
+                <img src="imatges/ej11.png" alt="Imatge 11" onclick="location.href='ex11/ex11.html'">
+                <div>
+                    <h3>Pong</h3>
+                    <p>Joc Pong Moviment amb W S i les fletches</p>
+                </div>
             </div>
         </div>
 
